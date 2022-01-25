@@ -30,23 +30,43 @@ const db = mysql.createConnection(
 // });
 
 // GET a single candidate
-db.query(`SELECT * FROM candidates WHERE id = 1`, (err, row) => {
-    if(err) {
-        console.log(err);
-    }
-    console.log(row);
-});
+
+// db.query(`SELECT * FROM candidates WHERE id = 1`, (err, row) => {
+//     if(err) {
+//         console.log(err);
+//     }
+//     console.log(row);
+// });
 
 // Delete a candidate
 // ? - placeholder, making this a prepared statement. 
 // A prepared statement - executes the same SQL statements repeatedly using different values in place of the placeholder.
 // One reason to use a placeholder in the SQL query is to block a SQL injection attack, which replaces the client user variable and inserts alternate commands that could reveal or destroy the database.
-db.query(`DELETE FROM candidates WHERE id = ?`, 1, (err, results) => {
+
+// db.query(`DELETE FROM candidates WHERE id = ?`, 1, (err, results) => {
+//     if(err) {
+//         console.log(err);
+//     }
+//     console.log(results);
+// });
+
+// Create a candidate
+// The SQL command and the SQL parameters were assigned to the sql and params variables respectively to improve the legibility for the call function to the database.
+// INSERT INTO - adds the values that are assigned to param.
+// VALUES (?,?,?,?) - because the candidates table includes four columns [id, first_name, last_name, industry_connected] we need four placeholders for those four values. 
+const sql = `INSERT INTO candidates (id, first_name, last_name, industry_connected)
+            VALUES (?,?,?,?)`
+;
+
+// The four placeholders must match the four values in params, so we must use an array.
+const params = [1, 'Ronald', 'Firbank', 1];
+
+db.query(sql, params, (err, results) =>{
     if(err) {
         console.log(err);
     }
-    console.log(results);
-});
+    console.log(results)
+})
 
 // Default response for any other request (Not Found). [catchall route]
 app.use((req, res) => {
