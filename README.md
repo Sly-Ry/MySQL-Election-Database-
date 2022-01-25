@@ -12,6 +12,9 @@ CREATE - creates a new database.
     Ex: CREATE DATABASE <db-name>;
         USE <db-name>;
 
+DELETE - deletes data from database.
+    EX: DELETE * FROM <table-name>;
+
 DROP - deletes the database with no remorse.
     Ex: DROP DATABASE <db-name>;
 

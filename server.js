@@ -37,6 +37,16 @@ db.query(`SELECT * FROM candidates WHERE id = 1`, (err, row) => {
     console.log(row);
 });
 
+// Delete a candidate
+// ? - placeholder, making this a prepared statement. 
+// A prepared statement - executes the same SQL statements repeatedly using different values in place of the placeholder.
+// One reason to use a placeholder in the SQL query is to block a SQL injection attack, which replaces the client user variable and inserts alternate commands that could reveal or destroy the database.
+db.query(`DELETE FROM candidates WHERE id = ?`, 1, (err, results) => {
+    if(err) {
+        console.log(err);
+    }
+    console.log(results);
+});
 
 // Default response for any other request (Not Found). [catchall route]
 app.use((req, res) => {
