@@ -19,6 +19,9 @@ DROP - deletes the database with no remorse.
     Ex: DROP DATABASE <db-name>;
 
 INSERT - creates a new data entry.
+    Ex: INSERT INTO <table-name> (<column-value(name)>)
+        VALUES
+            ('<value(ryan)>');
 
 SELECT - used to read a table.
     Ex: SELECT * FROM <table-name>;
@@ -26,6 +29,9 @@ SELECT - used to read a table.
 SHOW - displays existing databases, tables.
     Ex: SHOW DATABASES;
         SHOW TABLES;
+
+TEXT - can store strings of varying length.
+    Ex: <column-value> TEXT;
 
 UPDATE - updates a data row. 
     Ex: UPDATE <db-name>
@@ -35,6 +41,9 @@ UPDATE - updates a data row.
 USE - switches to specified database.
     Ex: USE <db-name>;
 
+VARCHAR -  must declare a limit on the length.
+    Ex: <column-value> VARCHAR(#) NOT NULL;
+    
 ## Troubleshooting
 - If you get an error stating that the database or table does not exist, you can start over and create the database again by running the following command:
 
