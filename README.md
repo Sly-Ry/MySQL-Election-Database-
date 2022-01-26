@@ -7,21 +7,33 @@ Initial sign in using Bash:
 ```bash
 mysql -u root -p
 ```
+ALTER TABLE - allows you to add a new field, delete an existing field, or modify a field.
+    Ex: ALTER TABLE <table1-name(candidates)> ADD COLUMN <new-column-value(party_id)> INTEGER;
 
 CREATE - creates a new database.
     Ex: CREATE DATABASE <db-name>;
         USE <db-name>;
 
+CONSTRAINT - allows us to flag additional tables as an official foreign key(fk) and tells SQL which table and field it references ensuring that no id can be inserted into the original table if it doesn't also exist in the additional table in which case MySQL will return an error for any operation that would violate a constraint.
+    Ex: CONSTRAINT fk_<table2-name(party)> FOREIGN KEY <table1-column-value(party_id)> REFERENCES <table2-column-value(party_id)> ON DELETE SET NULL
+
 DELETE - deletes data from database.
     EX: DELETE FROM <table-name>;
 
+
 DROP - deletes the database with no remorse.
     Ex: DROP DATABASE <db-name>;
+
+FOREIGN KEY - a field in one table that references the primary key of another table.
+    Ex: CONSTRAINT fk_<table2-name(party)> FOREIGN KEY <table1-column-value(party_id)> REFERENCES <table2-column-value(party_id)> ON DELETE SET NULL
 
 INSERT - creates a new data entry.
     Ex: INSERT INTO <table-name> (<column-value(name)>)
         VALUES
             ('<value(ryan)>');
+
+ON DELETE SET NULL - sets a table's <column-value> to NULL if the corresponding row is ever deleted.
+    Ex: CONSTRAINT fk_<table2-name(party)> FOREIGN KEY <table1-column-value(party_id)> REFERENCES <table2-column-value(party_id)> ON DELETE SET NULL
 
 SELECT - used to read a table.
     Ex: SELECT * FROM <table-name>;
