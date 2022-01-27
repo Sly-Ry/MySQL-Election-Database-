@@ -20,6 +20,13 @@ CREATE - creates a new database.
 CONSTRAINT - allows us to flag additional tables as an official foreign key(fk) and tells SQL which table and field it references ensuring that no id can be inserted into the original table if it doesn't also exist in the additional table in which case MySQL will return an error for any operation that would violate a constraint.
     Ex: CONSTRAINT fk_<table2(party)> FOREIGN KEY <table1-column-value(party_id)> REFERENCES <table2-column-value(party_id)> ON DELETE SET NULL
 
+CURRENT_TIMESTAMP -  this will return the current date and time in the same 2020-01-01 13:00:00 format. Note that the time will be based on what time it is according to your server, not the client's machine.
+
+DATETIME - [will look something like 2020-01-01 13:00:00] The front-end team can take that value, convert it with JavaScript's Date() constructor and display anything they want.
+    Ex: created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+
+DEFAULT - if you don't specify NOT NULL, then a field could potentially be NULL if that value isn't provided in an INSERT statement. With DEFAULT, however, you can specify what the value should be if no value is provided.
+
 DELETE - deletes data from database.
     EX: DELETE FROM <table-name>;
 
