@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql2');
+const { resourceLimits } = require('worker_threads');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -149,6 +150,42 @@ app.delete('/api/party/:id', (req, res) => {
     });
 });
 
+// Update a candidate's party
+// The affected row's id should always be part of the route (e.g., /api/candidate/2) 
+app.put('/api/candidate/:id', (req, res) => {
+    const errors = inputCheck(req.body, 'party_id');
+
+    if (errors) {
+        res.status(400).json({ error: errors });
+        return;
+    }
+    
+    const sql = `UPDATE candidates SET party_id = ? 
+        WHERE id = ?`
+    ;
+    const params = [req.body.party_id, req.params.id];
+
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            res.status(400).json({ error: err.message });
+            // Check if a record exists
+        }
+        else if (!result.affectedRows) {
+            res.json({
+                message: 'Candidate not found'
+            });
+        }
+        else {
+            // The actual fields we're updating should be part of the body.
+            res.json({
+                message: 'Success.',
+                data: req.body,
+                changes: resourceLimits.affectedRows
+            });
+        }
+    })
+});
+
 // Create a candidate
 app.post('/api/candidate', ({ body }, res) => {
     // inputCheck - verifies that user info in the request can create a candidate.
@@ -166,7 +203,7 @@ app.post('/api/candidate', ({ body }, res) => {
     const sql = `INSERT INTO candidates (first_name, last_name, industry_connected)
         VALUES (?,?,?)`
     ;
-    // // The three placeholders must match the three values in params, so we must use an array.
+    // The three placeholders must match the three values in params, so we must use an array.
     const params = [body.first_name, body.last_name, body.industry_connected];
 
     db.query(sql, params, (err, result) => {
@@ -180,7 +217,6 @@ app.post('/api/candidate', ({ body }, res) => {
         });
     });
 });
-
 // Default response for any other request (Not Found). [catchall route]
 app.use((req, res) => {
     res.status(404).end();
