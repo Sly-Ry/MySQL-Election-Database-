@@ -1,27 +1,13 @@
 const express = require('express');
-const mysql = require('mysql2');
-const { resourceLimits } = require('worker_threads');
+const db = require('./db/connection')
+const inputCheck = require('./utils/inputCheck');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-const inputCheck = require('./utils/inputCheck');
 
 // Express middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-// Connect to database
-const db = mysql.createConnection(
-    {
-        host: 'localhost',
-        // Your MySQL username,
-        user: 'root',
-        // Your MySQL password
-        password: 'eNderRoot1993',
-        database: 'election'
-    },
-    console.log('Connected to the election database.')
-);
 
 // GET all candidates.
 // The api in the URL signifies that this is an API endpoint.
