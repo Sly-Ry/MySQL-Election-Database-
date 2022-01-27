@@ -36,6 +36,10 @@ INSERT - creates a new data entry.
         VALUES
             ('<value(ryan)>');
 
+JOIN - joins tables throught ids
+    Ex: SELECT * FROM <items>
+        LEFT JOIN <categories> ON <items.category_id> = <categories.id>;
+
 ON DELETE SET NULL - sets a table's <column-value> to NULL if the corresponding row is ever deleted.
     Ex: CONSTRAINT fk_<table2-name(party)> FOREIGN KEY <table1-column-value(party_id)> REFERENCES <table2-column-value(party_id)> ON DELETE SET NULL
 
