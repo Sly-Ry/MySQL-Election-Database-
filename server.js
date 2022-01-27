@@ -25,14 +25,18 @@ const db = mysql.createConnection(
 // GET all candidates.
 // The api in the URL signifies that this is an API endpoint.
 app.get('/api/candidates', (req, res) => {
-    const sql = `SELECT * FROM candidates`;
+    const sql = `SELECT candidates.*, parties.name 
+                AS party_name 
+                FROM candidates 
+                LEFT JOIN parties 
+                ON candidates.party_id = parties.id`;
     // db.query() - runs the SQL query and executes the callback with all the resulting rows that match the query.Once this method executes the SQL command, the callback function captures the responses from the query in two variables.
     // err - the error response.
     // rows - the database query response.
     db.query(sql, (err, rows) => {
         if (err) {
             // Instead of logging the error, we'll send a status code of 500 and place the error message within a JSON object. 
-            res.status(500).json({ error: err.messgae });
+            res.status(500).json({ error: err.message });
             return;
         }
         // If there was no error, then err is null and the response is sent back using the following statement:
@@ -45,7 +49,12 @@ app.get('/api/candidates', (req, res) => {
 
 // GET a single candidate
 app.get('/api/candidate/:id', (req, res) => {
-    const sql = `SELECT * FROM candidates WHERE id = ?`
+    const sql = `SELECT candidates.*, parties.name 
+                AS party_name 
+                FROM candidates 
+                LEFT JOIN parties 
+                ON candidates.party_id = parties.id 
+                WHERE candidates.id = ?`;
     const params = [req.params.id];
 
     db.query(sql, params, (err, row) => {

@@ -8,21 +8,25 @@ Initial sign in using Bash:
 mysql -u root -p
 ```
 ALTER TABLE - allows you to add a new field, delete an existing field, or modify a field.
-    Ex: ALTER TABLE <table1-name(candidates)> ADD COLUMN <new-column-value(party_id)> INTEGER;
+    Ex: ALTER TABLE <table1-name(candidates)> ADD COLUMN <new-column-name(party_id)> INTEGER;
+
+AS - lets you define an alias for your data, which is particularly useful when joining tables that might have overlapping field names.
+    Ex: SELECT <db-name(candidates)>.*, <table2>.<table1-colomn-name)> AS <new-column-name(party_name)>
 
 CREATE - creates a new database.
     Ex: CREATE DATABASE <db-name>;
         USE <db-name>;
 
 CONSTRAINT - allows us to flag additional tables as an official foreign key(fk) and tells SQL which table and field it references ensuring that no id can be inserted into the original table if it doesn't also exist in the additional table in which case MySQL will return an error for any operation that would violate a constraint.
-    Ex: CONSTRAINT fk_<table2-name(party)> FOREIGN KEY <table1-column-value(party_id)> REFERENCES <table2-column-value(party_id)> ON DELETE SET NULL
+    Ex: CONSTRAINT fk_<table2(party)> FOREIGN KEY <table1-column-value(party_id)> REFERENCES <table2-column-value(party_id)> ON DELETE SET NULL
 
 DELETE - deletes data from database.
     EX: DELETE FROM <table-name>;
 
 
-DROP - deletes the database with no remorse.
-    Ex: DROP DATABASE <db-name>;
+DROP - deletes the database or table with no remorse.
+    Ex: [a] DROP DATABASE <db-name>;
+        [b] DROP TABLE IF EXISTS <db-name>;
 
 FOREIGN KEY - a field in one table that references the primary key of another table.
     Ex: CONSTRAINT fk_<table2-name(party)> FOREIGN KEY <table1-column-value(party_id)> REFERENCES <table2-column-value(party_id)> ON DELETE SET NULL
