@@ -30,13 +30,15 @@ DEFAULT - if you don't specify NOT NULL, then a field could potentially be NULL 
 DELETE - deletes data from database.
     EX: DELETE FROM <table-name>;
 
+DESC - sorts data in descending order (i.e., starting at Z instead of A).
+    Ex: ORDER BY <column-value(last_name)> DESC
 
 DROP - deletes the database or table with no remorse.
     Ex: [a] DROP DATABASE <db-name>;
         [b] DROP TABLE IF EXISTS <db-name>;
 
 FOREIGN KEY - a field in one table that references the primary key of another table.
-    Ex: CONSTRAINT fk_<table2-name(party)> FOREIGN KEY <table1-column-value(party_id)> REFERENCES <table2-column-value(party_id)> ON DELETE SET NULL
+    Ex: CONSTRAINT fk_<table2-name(party)> FOREIGN KEY <table1-column-value(party_id)> REFERENCES <table2(parties)><table2-column-name(id)> ON DELETE SET NULL
 
 INSERT - creates a new data entry.
     Ex: INSERT INTO <table-name> (<column-value(name)>)
@@ -49,6 +51,8 @@ JOIN - joins tables throught ids
 
 ON DELETE SET NULL - sets a table's <column-value> to NULL if the corresponding row is ever deleted.
     Ex: CONSTRAINT fk_<table2-name(party)> FOREIGN KEY <table1-column-value(party_id)> REFERENCES <table2-column-value(party_id)> ON DELETE SET NULL
+
+ORDER - rows can be sorted on retrieval.
 
 SELECT - used to read a table.
     Ex: SELECT * FROM <table-name>;
