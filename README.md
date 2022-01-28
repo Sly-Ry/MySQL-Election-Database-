@@ -13,6 +13,8 @@ ALTER TABLE - allows you to add a new field, delete an existing field, or modify
 AS - lets you define an alias for your data, which is particularly useful when joining tables that might have overlapping field names.
     Ex: SELECT <db-name(candidates)>.*, <table2>.<table1-colomn-name)> AS <new-column-name(party_name)>
 
+AVG - [aggregate function] returns the average value within a group
+
 CASCADE - deleting the reference key will also delete the entire row from this table.
     Ex: ON DELETE CASCADE
 
@@ -24,6 +26,9 @@ CONSTRAINT - allows us to flag additional tables as an official foreign key(fk) 
     Ex: CONSTRAINT fk_<table2(party)> FOREIGN KEY <table1-column-value(party_id)> REFERENCES <table2-column-value(party_id)> ON DELETE SET NULL
 
 CURRENT_TIMESTAMP -  this will return the current date and time in the same 2020-01-01 13:00:00 format. Note that the time will be based on what time it is according to your server, not the client's machine.
+
+COUNT - [aggregate function] counts how many times a certain field value appears.
+    Ex: SELECT COUNT(candidate_id) FROM votes;
 
 DATETIME - [will look something like 2020-01-01 13:00:00] The front-end team can take that value, convert it with JavaScript's Date() constructor and display anything they want.
     Ex: created_at DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -43,6 +48,8 @@ DROP - deletes the database or table with no remorse.
 FOREIGN KEY - a field in one table that references the primary key of another table.
     Ex: CONSTRAINT fk_<table2-name(party)> FOREIGN KEY <table1-column-value(party_id)> REFERENCES <table2(parties)><table2-column-name(id)> ON DELETE SET NULL
 
+GROUP BY - consolidates several rows of data, grouping by a shared value (e.g., candidate_id). The nice thing about GROUP BY is that you can then run an aggregate function to retrieve an average, sum, or minimum value from the group.
+
 INSERT - creates a new data entry.
     Ex: INSERT INTO <table-name> (<column-value(name)>)
         VALUES
@@ -51,6 +58,8 @@ INSERT - creates a new data entry.
 JOIN - joins tables throught ids
     Ex: SELECT * FROM <items>
         LEFT JOIN <categories> ON <items.category_id> = <categories.id>;
+
+MIN - [aggregate function] returns the minimum value of a group
 
 ON DELETE SET NULL - sets a table's <column-value> to NULL if the corresponding row is ever deleted.
     Ex: CONSTRAINT fk_<table2-name(party)> FOREIGN KEY <table1-column-value(party_id)> REFERENCES <table2-column-value(party_id)> ON DELETE SET NULL
@@ -63,6 +72,8 @@ SELECT - used to read a table.
 SHOW - displays existing databases, tables.
     Ex: SHOW DATABASES;
         SHOW TABLES;
+
+SUM -[aggregate function] adds up all of the values in a group
 
 TEXT - can store strings of varying length.
     Ex: <column-value> TEXT;
