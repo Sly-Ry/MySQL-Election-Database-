@@ -13,6 +13,9 @@ ALTER TABLE - allows you to add a new field, delete an existing field, or modify
 AS - lets you define an alias for your data, which is particularly useful when joining tables that might have overlapping field names.
     Ex: SELECT <db-name(candidates)>.*, <table2>.<table1-colomn-name)> AS <new-column-name(party_name)>
 
+CASCADE - deleting the reference key will also delete the entire row from this table.
+    Ex: ON DELETE CASCADE
+
 CREATE - creates a new database.
     Ex: CREATE DATABASE <db-name>;
         USE <db-name>;
