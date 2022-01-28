@@ -56,5 +56,57 @@ router.post('/voter', ({ body }, res) => {
     });
 });
 
+router.delete('/voter/:id', (req, res) => {
+    const sql = `DELETE FROM voters WHERE id = ?`;
+
+    db.query(sql, req.params.id, (err, result) => {
+        if (err) {
+            res.statusMessage(400).json({ error: err.message });
+        }
+        else if (!result.affectedRows) {
+            res.json({
+                message: 'Voter not found.'
+            });
+        }
+        else {
+            res.json({
+                message: 'deleted',
+                changes: result.affectedRows,
+                id: req.params.id
+            });
+        }
+    });      
+});
+
+router.put('/voter/:id', (req, res) => {
+    const errors = inputCheck(req.body, 'email');
+    if (errors) {
+        res.status(400).json({ error: errors });
+        return;
+    }
+
+    const sql = `UPDATE voters SET email = ? WHERE id = ?`;
+    const params = [req.body.email, req.params.id];
+
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            // Instead of logging the error, we'll send a status code of 500 and place the error message within a JSON object. 
+            res.status(400).json({ error: err.message });
+        }
+        else if (!result.affectedRows) {
+            res.json({
+                message: 'Voter not found.'
+            });
+        }
+        else {
+            res.json({
+                message: 'Success.',
+                data: req.body,
+                changes: result.affectedRows
+            });
+        }
+    });
+});
+
 module.exports = router;
 

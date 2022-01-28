@@ -141,7 +141,7 @@ router.put('/candidate/:id', (req, res) => {
             res.json({
                 message: 'Success.',
                 data: req.body,
-                changes: resourceLimits.affectedRows
+                changes: result.affectedRows
             });
         }
     })
