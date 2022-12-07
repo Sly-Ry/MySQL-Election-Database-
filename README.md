@@ -1,5 +1,5 @@
-# U-Develop-It
-Module 12
+# MySQL Election Database 
+A MySQL application that creates databases for elections (parties, candidates, voters, votes)
 
 ## Definitions/Tools
 Initial sign in using Bash: 
@@ -7,6 +7,9 @@ Initial sign in using Bash:
 ```bash
 mysql -u root -p
 ```
+- Enter Password
+
+
 ALTER TABLE - allows you to add a new field, delete an existing field, or modify a field.
     Ex: ALTER TABLE <table1-name(candidates)> ADD COLUMN <new-column-name(party_id)> INTEGER;
 
