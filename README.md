@@ -1,5 +1,5 @@
 # U-Develop-It
-Module 12
+A MySQL application that creates databases for elections (parties, candidates, voters, votes)
 
 ## Definitions/Tools
 Initial sign in using Bash: 
