@@ -1,4 +1,4 @@
-# U-Develop-It
+# MySQL Election Database 
 A MySQL application that creates databases for elections (parties, candidates, voters, votes)
 
 ## Definitions/Tools
